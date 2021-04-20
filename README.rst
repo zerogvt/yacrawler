@@ -1,9 +1,9 @@
-Sample Module Repository
+Yacrawler
 ========================
 
-This simple project is an example repo for Python projects.
-
-`Learn more <http://www.kennethreitz.org/essays/repository-structure-and-python>`_.
+ Given a starting URL, the crawler will visit each URL it finds on the same domain.
+ It should print each URL visited, and a list of links found on that page.
+ The crawler limits itself to the subdomain of the starting url.
 
 ---------------
 
