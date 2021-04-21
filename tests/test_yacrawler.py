@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from yacrawler.yacrawler import same_domain, rm_www_prefix, to_str, eat
+from bs4 import BeautifulSoup
 
 import unittest
 from unittest.mock import patch, Mock
 
 
 class YacrawlerTest(unittest.TestCase):
-    """Basic test cases."""
+    """Unit tests for yacrawler"""
 
     def test_same_domain_ok(self):
         self.assertTrue(same_domain("http://www.domain.com", "http://domain.com"))
@@ -32,8 +33,7 @@ class YacrawlerTest(unittest.TestCase):
         want = "domain.com\n\tone\n\ttwo\n\tthree"
         self.assertEqual(to_str(links), want)
 
-    @patch("yacrawler", "BeautifulSoup")
-    def test_eat(self, m_bs):
+    def test_eat(self):
         html_doc = """<html><head><title>The Dormouse's story</title></head>
                     <body>
                     <p class="title"><b>The Dormouse's story</b></p>
@@ -46,3 +46,16 @@ class YacrawlerTest(unittest.TestCase):
 
                     <p class="story">...</p>
                     """
+        url = "http://domain.com"
+        soup = BeautifulSoup(html_doc, features="html.parser")
+        have = eat(url, soup)
+        want = {
+            "url": "http://domain.com",
+            "links": [
+                "http://example.com/elsie",
+                "http://example.com/lacie",
+                "http://example.com/tillie",
+            ],
+            "todo": [],
+        }
+        self.assertEqual(want, have)

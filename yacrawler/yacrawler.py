@@ -3,9 +3,7 @@ from bs4 import BeautifulSoup
 from requests import get, HTTPError
 import validators
 from urllib.parse import urlparse
-from multiprocessing import Pool, active_children, Queue, Manager
-
-NUM_CORES = 4
+from multiprocessing import Pool, active_children, Queue, Manager, cpu_count
 
 
 def rm_www_prefix(text):
@@ -66,7 +64,7 @@ def crawl(url):
     todo = [url]
     visited = {}
     links = {}
-    with Pool(processes=NUM_CORES) as pool:
+    with Pool(processes=cpu_count()) as pool:
         while todo:
             results = pool.map(scrape, todo)
             todo.clear()
