@@ -30,14 +30,13 @@ def scrape(url):
                 res['links'].append(link_href)
         except TypeError:
             pass
-    print_links({url: res['links']})
+    print_links(res)
     return res
 
 def print_links(links):
-    for url in links:
-        print(url, flush=True)
-        for sub in links[url]:
-            print(f"\t{sub}", flush=True)
+    print(links['url'], flush=True)
+    for sub in links['links']:
+        print(f"\t{sub}", flush=True)
     print("")
 
 
@@ -55,4 +54,3 @@ def crawl(url):
                 for url in res['todo']:
                     if url not in visited and url not in todo:
                         todo.append(url)
-    # print_links(links)

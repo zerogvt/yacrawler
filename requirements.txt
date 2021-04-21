@@ -1,4 +1,4 @@
-nose
+pytest
 sphinx
 bs4
 requests
