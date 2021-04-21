@@ -1,4 +1,4 @@
 import sys
-from .yacrawler import Crawler
+from .yacrawler import crawl
 
-Crawler(urls=sys.argv[1:]).crawl()
+crawl(url=sys.argv[1])
