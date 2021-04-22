@@ -5,9 +5,10 @@
 
  # Design
 The Crawler crawls a url in a recursive and concurrent way.
+
 It uses python multiprocessing package to utilize a multicore architecture with the number of concurrent processes matching the number of the cores of the hosting platform.
 
-The algorithm (method `crawl()`) starts by adding in the todo list the initial url and having that todo list to feed a pool of scraping processes. 
+The algorithm (method `crawl()`) starts by adding in the todo list the initial url and having that todo list to feed a pool of scraping processes.
 
 Every scrape process is assigned a single url that it gets out of todo list.
 
@@ -15,7 +16,7 @@ It then scrapes the page at that url using beatifulsoup to parse it and adds the
 
 New todo links are appended in the global todo list for future scrape process to grab.
 
-A dictinary (visited) marks off urls that have been already visited so that we don't revisit them in the event of them being present in a deeper level url.
+A dictionary (`visited`) marks off urls that have been already visited so that we don't revisit them in the event of them being present in a deeper level url.
 
 The process ends when no urls are left in the global todo list.
 
@@ -25,7 +26,9 @@ The process ends when no urls are left in the global todo list.
 
 # How to setup / Example run
 `bash setup.sh` : This will create a python virtual env, install a few dependencies in it and activate it.
+
 `python -m yacrawler https://docs.python.org` : This will start a crawler on `https://docs.python.org` to which you should start seeing output like:
+
 ```
 (venv) yacrawler$ python -m yacrawler https://docs.python.org
 https://docs.python.org
@@ -43,3 +46,6 @@ https://docs.python.org
 	https://wiki.python.org/moin/BeginnersGuide
 	https://wiki.python.org/moin/PythonBooks
 ```
+
+# Run unit tests
+`make test`
