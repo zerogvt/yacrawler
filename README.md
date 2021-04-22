@@ -1,10 +1,12 @@
 # Yacrawler - Yet Another Crawler
- Given a starting URL, the crawler will visit each URL it finds on the same domain.
- It should print each URL visited, and a list of links found on that page.
- The crawler limits itself to the subdomain of the starting url.
+Given a starting URL, the crawler will visit each URL it finds on the same domain.
+
+It will print each URL visited, and a list of links found on that page.
+
+The crawler limits itself to the subdomain of the starting url.
 
  # Design
-The Crawler crawls a url in a recursive and concurrent way.
+The Crawler crawls a url in a recursive and **concurrent** way.
 
 It uses python multiprocessing package to utilize a multicore architecture with the number of concurrent processes matching the number of the cores of the hosting platform.
 
