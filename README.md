@@ -55,7 +55,7 @@ https://docs.python.org
 	https://wiki.python.org/moin/PythonBooks
 ```
 
-The visited url is printed out unintented whilst the links found in it are printed in tabbed lines.
+The visited url is printed out unintented whilst the links found in it are printed underneath it in tabbed lines.
 
 # Run unit tests
 `make test`
