@@ -20,12 +20,18 @@ A dictionary (`visited`) marks off urls that have been already visited so that w
 
 The process ends when no urls are left in the global todo list.
 
-# Preconditions 
+# Preconditions
+- A POSIX OS (linux or OSx)
 - [Python 3.7+ and pip](https://docs.python-guide.org/dev/virtualenvs/#make-sure-you-ve-got-python-pip)
 - [virtualenv](https://docs.python-guide.org/dev/virtualenvs/#lower-level-virtualenv)
 
 # How to setup / Example run
-`bash setup.sh` : This will create a python virtual env, install a few dependencies in it and activate it.
+```
+virtualenv -p $(which python3) venv
+. venv/bin/activate
+pip install -r requirements.txt
+```
+This will create a python virtual env, activate it and install a few dependencies in it.
 
 `python -m yacrawler https://docs.python.org` : This will start a crawler on `https://docs.python.org` to which you should start seeing output like:
 
