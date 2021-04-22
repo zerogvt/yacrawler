@@ -20,6 +20,7 @@ def same_domain(url1, url2):
 
 
 def cook(url):
+    print(get)
     try:
         page = get(url)
         soup = BeautifulSoup(page.text, features="html.parser")
@@ -70,7 +71,8 @@ def crawl(url):
             todo.clear()
             for res in results:
                 visited[res["url"]] = True
-                links[res["url"]] = res["links"]
+                links[res["url"]] = {"url": res["url"], "links": res["links"]}
                 for url in res["todo"]:
                     if url not in visited and url not in todo:
                         todo.append(url)
+    return links
