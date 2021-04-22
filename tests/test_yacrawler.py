@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from yacrawler.yacrawler import same_domain, rm_www_prefix, to_str, eat, cook, crawl
 from bs4 import BeautifulSoup
-
 import unittest
 from unittest.mock import patch, Mock
 
@@ -71,15 +70,32 @@ class YacrawlerTest(unittest.TestCase):
         soup = cook("doesntmatter.com")
         self.assertEqual(soup.title.string, "The Dormouse's story")
 
-    @patch("yacrawler.yacrawler.get")
-    def test_crawl(self, m_get):
-        class Page:
-            def __init__(self, text):
-                self.text = text
-        m_get.return_value = Page(self.html_doc)
-        url = "http://domain.notthere.com"
+    @patch("yacrawler.yacrawler.Pool")
+    def test_crawl(self, m_pool):
+        url = "http://domain.com"
+        m_pool_map = Mock()
+        m_pool.return_value.__enter__.return_value.map = m_pool_map
+        m_pool_map.return_value = [
+            {
+                "url": url,
+                "links": [
+                    "http://domain.com/1",
+                    "http://domain.com/2",
+                    "http://anotherdomain.com/1",
+                ],
+                "todo": [],
+            }
+        ]
         have = crawl(url)
-        want = {url: {"url": url, "links": ["http://example.com/elsie",
-                                            "http://example.com/lacie",
-                                            "http://example.com/tillie"]}}
+        print(have)
+        want = {
+            url: {
+                "url": url,
+                "links": [
+                    "http://domain.com/1",
+                    "http://domain.com/2",
+                    "http://anotherdomain.com/1",
+                ],
+            }
+        }
         self.assertEqual(want, have)
