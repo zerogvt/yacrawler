@@ -33,7 +33,9 @@ pip install -r requirements.txt
 ```
 This will create a python virtual env, activate it and install a few dependencies in it.
 
-`python -m yacrawler https://docs.python.org` : This will start a crawler on `https://docs.python.org` to which you should start seeing output like:
+`python -m yacrawler https://docs.python.org`
+
+This will start a crawler on `https://docs.python.org` to which you should start seeing output like:
 
 ```
 (venv) yacrawler$ python -m yacrawler https://docs.python.org
